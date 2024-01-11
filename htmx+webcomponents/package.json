@@ -2,11 +2,12 @@
   "name": "htmx",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
+  "module": "es2022",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.ts",
-    "dev": "nodemon server.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "css": "npx tailwindcss -i ./src/input.css -o ./public/output.css --watch"
   },
   "keywords": [],
