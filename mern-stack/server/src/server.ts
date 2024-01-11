@@ -1,5 +1,9 @@
 // server.ts
+import 'dotenv/config';
 import express, { Request , Response } from 'express';
+import commentRoutes from '../src/routes/comment';
+import { connectToDatabase } from './db/conn';
+// import { configDotenv } from 'dotenv';
 
 
 /*****************************************/
@@ -10,17 +14,20 @@ import express, { Request , Response } from 'express';
 
 const app = express();
 
-const port = process.env.PORT || 3001;
+const cors = require("cors");
 
-app.listen(port, ()=> { 
-  console.log(`Express (TS) server listening on port ${port}`);
-});
+console.log(process.env);
+
+const port = process.env.PORT || 3001;
 
 /*****************************************/
 //
 // Configuration
 //
 /*****************************************/
+
+// Cross Origin Resource Sharing
+app.use(cors());
 
 // this is the folder served in the production build
 app.use(express.static('public'));
@@ -31,6 +38,17 @@ app.use(express.urlencoded({extended: true}));
 // parses json sent via API clients
 app.use(express.json());
 
+
+// apply custom routes for comments records
+app.use(commentRoutes);
+
+app.listen(port, ()=> { 
+  connectToDatabase().catch((connectFailReason: any) => {
+    console.log({connectFailReason});
+  })
+  console.log(`Express (TS) server listening on port ${port}`);
+});
+
 /*****************************************/
 //
 // Routes
@@ -38,9 +56,15 @@ app.use(express.json());
 /*****************************************/
 
 app.get('/', (req: Request, res: Response) => {
+  if(!req) {
+    console.warn("no request object for route '/'");
+  }
   res.send("Express w/Typescript");
 });
 
-app.get('/hello', (req:Request, res:Response) => {
+app.get('/hello', (req: Request, res:Response) => {
+  if(!req) {
+    console.warn("no request object for route '/hello'");
+  }
   res.send("Hello World!");
 });
