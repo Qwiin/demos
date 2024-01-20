@@ -1,7 +1,8 @@
 // server.ts
 import 'dotenv/config';
 import express, { Request , Response } from 'express';
-import commentRoutes from '../src/routes/comment';
+import commentsRoutes from './routes/comments';
+import moviesRoutes from './routes/movies';
 import { connectToDatabase } from './db/conn';
 // import { configDotenv } from 'dotenv';
 
@@ -40,7 +41,8 @@ app.use(express.json());
 
 
 // apply custom routes for comments records
-app.use(commentRoutes);
+app.use(commentsRoutes);
+app.use(moviesRoutes);
 
 app.listen(port, ()=> { 
   connectToDatabase().catch((connectFailReason: any) => {

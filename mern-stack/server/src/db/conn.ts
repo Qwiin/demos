@@ -38,7 +38,8 @@ const connectToDatabase = async (): Promise<MDBConnection> => {
 
     // get records
     const collections = { 
-      comments: db.collection("comments")
+      comments: db.collection("comments"),
+      movies: db.collection("movies")
     };
 
     // set cache
