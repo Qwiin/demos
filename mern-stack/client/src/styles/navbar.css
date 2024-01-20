@@ -1,0 +1,19 @@
+.dq-navbar {
+  background-color: #044499;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+.dq-navlink {
+  border-radius: 5px;
+  color: #CCAAAA;
+  font-weight: 300;
+  margin: inherit 5px;
+  padding: inherit 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.dq-navlink:hover {
+  background-color: #FFFFFF;
+}
